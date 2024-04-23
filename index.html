@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Number API</title>
+</head>
+<body>
+    <h1 style="text-align: center;">An API for interesting facts about numbers </h1>
+    <button id="toogle_form_button">Show date form</button>
+    <form id="number_form" class="">
+        <input type="number" id="number_input" placeholder="For example 42" min="0" required>
+        <label for="number_input">Enter any number</label>
+        <br>
+        <button type="submit" id="submit_number_button">Show fact</button>
+    </form>
+    <form id="date_form" class="hidden">
+        <input type="number" id="month_input" placeholder="For example 4" min="1" max="12" required>
+        <label for="month_input">Enter month number</label>
+        <br>
+        <input type="number" id="day_input" placeholder="For example 18" min="1" max="31" required>
+        <label for="day_input">Enter day number</label>
+        <br>
+        <button type="submit" id="submit_date_button">Show fact</button>
+    </form>
+
+
+    <ul id="output_ul" class="rolldown-list" id="myList"></ul>
+    
+    
+    <script src="html_elements.js"></script>
+    <script type="module" src="submit_forms.js"></script>
+    <script type="module" src="requests.js"></script>
+    <script type="module" src="handle_submit.js"></script>
+    <script src="toogle_form.js"></script>
+    <script src="remove.js"></script>
+
+</body>
+</html>
