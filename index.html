@@ -4,28 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="form_style.scss">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Number API</title>
 </head>
 <body>
     <h1 style="text-align: center;">An API for interesting facts about numbers </h1>
-    <button id="toogle_form_button">Show date form</button>
-    <form id="number_form" class="">
-        <input type="number" id="number_input" placeholder="For example 42" min="0" required>
-        <label for="number_input">Enter any number</label>
-        <br>
-        <button type="submit" id="submit_number_button">Show fact</button>
+    <button id="toogle_form_button" class="button-6" role="button">Show date form</button>
+    <form id="number_form" class="card">
+        <h2>Number form</h2>
+          <label class="input">
+            <input class="input__field" type="number" placeholder=" " type="number" id="number_input"  min="0" required />
+            <span class="input__label">Enter number</span>
+          </label>
+          <div class="button-group">
+            <button type="submit" >Show fact</button>
+            <button type="reset" >Reset</button>
+          </div>
+        
     </form>
-    <form id="date_form" class="hidden">
-        <input type="number" id="month_input" placeholder="For example 4" min="1" max="12" required>
-        <label for="month_input">Enter month number</label>
-        <br>
-        <input type="number" id="day_input" placeholder="For example 18" min="1" max="31" required>
-        <label for="day_input">Enter day number</label>
-        <br>
-        <button type="submit" id="submit_date_button">Show fact</button>
+    <form id="date_form" class="card hidden">
+      <h2>Date form</h2>
+      <label class="input">
+        <input class="input__field" type="number" placeholder=" " type="number" id="month_input"  min="1" max="12" required />
+        <span class="input__label">Enter month number</span>
+      </label>
+      <label class="input">
+        <input class="input__field" type="number" placeholder=" " type="number" id="day_input"  min="1" max="31" required />
+        <span class="input__label">Enter day number</span>
+      </label>
+      <div class="button-group">
+        <button type="submit" >Show fact</button>
+        <button type="reset" >Reset</button>
+      </div>
     </form>
+    
+    <!--
+        <div id="date_form_input_div" class="input card">
+            <label for="month_input">Enter month number</label>
+            <input type="number" id="month_input" placeholder="For example 4" min="1" max="12" required>
+            <br>
+            <label for="day_input">Enter day number</label>
+            <input type="number" id="day_input" placeholder="For example 18" min="1" max="31" required>
+            
+        </div>
+        
+        <button type="submit" id="submit_date_button" class="button-6" role="button">Show fact</button>
+    -->
 
+    
+  
 
     <ul id="output_ul" class="rolldown-list" id="myList"></ul>
     
@@ -36,6 +64,7 @@
     <script type="module" src="handle_submit.js"></script>
     <script src="toogle_form.js"></script>
     <script src="remove.js"></script>
+    <script src="forms.js"></script>
 
 </body>
 </html>

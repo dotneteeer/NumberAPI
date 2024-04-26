@@ -66,6 +66,7 @@ function DeleteItemHandler() {
         function deleteTask() {
             if (mousedown) {
                 $field.remove();
+                //remove from local storage
                 lastDeletedTask = $field.text();
                 console.log(lastDeletedTask);
 
