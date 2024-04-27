@@ -21,7 +21,6 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 .like-button {
@@ -467,8 +466,8 @@ body {
    user-select: none;
 	 left: 0;
 	 top: 0;
-	 padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
-	 margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
+	 padding: calc(var(--size-bezel) * 0.5) calc(var(--size-bezel) * .5);
+	 margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .6);
 	 background: pink;
 	 white-space: nowrap;
 	 transform: translate(0, 0);

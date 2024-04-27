@@ -1,4 +1,6 @@
 import { GetNumberDescription, GetDateDescription } from "./requests.js";
+import { ChangeFavorite } from "./favorites.js"
+import { GetMaxValueNumber } from "./localStorage.js"
 
 export function handleSubmit() {
     if (current_form === 'number') {
@@ -10,9 +12,10 @@ export function handleSubmit() {
 
 }
 
-const AddListItem = function (answer) {
+export function AddListItem(answer, focused = false, id = null) {
     const li = document.createElement("li")
     li.className = 'task'
+    li.id = id != null ? id : CreateLiId()
     const text_div = document.createElement("div")
     text_div.className = 'task__field'
     text_div.style.padding = '1em'
@@ -35,11 +38,25 @@ const AddListItem = function (answer) {
         </div>
     </div>
     `;
-    setTimeout(() => buttonElement.classList.toggle('focused'), 100);
-    setTimeout(() => buttonElement.classList.toggle('focused'), 1000);
-    buttonElement.addEventListener('click', () => buttonElement.classList.toggle('focused'))
+
+    if (focused) {
+        buttonElement.classList.add('focused')
+    }
+    else {
+        setTimeout(() => buttonElement.classList.toggle('focused'), 100);
+        setTimeout(() => buttonElement.classList.toggle('focused'), 1000);
+    }
+
+    buttonElement.addEventListener('click', function () {
+        buttonElement.id += ChangeFavorite(buttonElement, answer, li.id)
+        buttonElement.classList.toggle('focused')
+    })
+
+    sessionStorage.setItem(li.id, answer)
+
     li.append(text_div, buttonElement);
     output_ul.appendChild(li)
+
     DeleteItemHandler()
 }
 
@@ -49,6 +66,7 @@ function DeleteItemHandler() {
     $('.task').each(function () {
         var lastDeletedTask;
         var $field = $(this).find('.task__field');
+        var li = $(this)
         var mousedown = false;
 
 
@@ -66,9 +84,8 @@ function DeleteItemHandler() {
         function deleteTask() {
             if (mousedown) {
                 $field.remove();
-                //remove from local storage
+                sessionStorage.removeItem(li.attr("id"))
                 lastDeletedTask = $field.text();
-                console.log(lastDeletedTask);
 
                 setTimeout(function () {
                     $field.remove();
@@ -79,3 +96,14 @@ function DeleteItemHandler() {
     });
 }
 
+function CreateLiId() {
+    let max = GetMaxValueNumber()
+    for (let index = 0; index < sessionStorage.length; index++) {
+        let key = +sessionStorage.key(index)
+        if (max < key) {
+            max = key
+        }
+    }
+
+    return max + 1;
+}
