@@ -83,7 +83,7 @@ function DeleteItemHandler() {
 
         function deleteTask() {
             if (mousedown) {
-                $field.remove();
+                $field.addClass('delete');
                 sessionStorage.removeItem(li.attr("id"))
                 lastDeletedTask = $field.text();
 

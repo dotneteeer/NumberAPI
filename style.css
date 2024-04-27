@@ -396,6 +396,12 @@ body {
   background-position: left bottom;
 }
 
+.task__field.delete {
+  transition: all 0.2s cubic-bezier(.7,.2,.17,1);
+  transform: scale(1.5, 2);
+  height:0;
+  opacity:0;
+}
 
 .task__field.shaking {
   animation: shake 0.1s 0.1s infinite ease-in-out;
