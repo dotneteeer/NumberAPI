@@ -508,6 +508,7 @@ body {
 	 border: none;
 	 border-radius: var(--size-radius);
 	 font-weight: 900;
+   transition: background  0.5s ease;
 }
  button[type=reset] {
 	 background: var(--color-background);
@@ -530,5 +531,5 @@ body {
 
 button:hover:not(button[type='reset']) {
   background: #fab7008c;
-  transition:  0.5s ease;
+  
 }

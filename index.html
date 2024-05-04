@@ -1,56 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.8.0/jquery.contextMenu.min.js"
+    ></script>
+    <link
+      href="https://www.cssscript.com/demo/sticky.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link rel="stylesheet" href="ContextMenu.css" />
     <title>Number API</title>
-</head>
-<body>
-    <h1 style="text-align: center;">An API for interesting facts about numbers </h1>
-    <button id="toogle_form_button" class="button-6" role="button">Show date form</button>
+    <link rel="shortcut icon" href="number_icon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <h1 style="text-align: center">
+      An API for interesting facts about numbers
+    </h1>
+    <button id="toogle_form_button" class="button-6" role="button">
+      Show date form
+    </button>
     <form id="number_form" class="card">
-        <h2>Number form</h2>
-          <label class="input"> 
-            <input class="input__field" type="number" placeholder=" " type="number" id="number_input"  min="0" required />
-            <span class="input__label">Enter number</span>
-          </label>
-          <div class="button-group">
-            <button type="submit" >Show fact</button>
-            <button type="reset" >Reset</button>
-          </div>
-        
+      <h2>Number form</h2>
+      <label class="input">
+        <input
+          class="input__field"
+          type="number"
+          placeholder=" "
+          type="number"
+          id="number_input"
+          min="0"
+          required
+        />
+        <span class="input__label">Enter number</span>
+      </label>
+      <div class="button-group">
+        <button type="submit">Show fact</button>
+        <button type="reset">Reset</button>
+      </div>
     </form>
     <form id="date_form" class="card hidden">
       <h2>Date form</h2>
       <label class="input">
-        <input class="input__field" type="number" placeholder=" " type="number" id="month_input"  min="1" max="12" required />
+        <input
+          class="input__field"
+          type="number"
+          placeholder=" "
+          type="number"
+          id="month_input"
+          min="1"
+          max="12"
+          required
+        />
         <span class="input__label">Enter month number</span>
       </label>
       <label class="input">
-        <input class="input__field" type="number" placeholder=" " type="number" id="day_input"  min="1" max="31" required />
+        <input
+          class="input__field"
+          type="number"
+          placeholder=" "
+          type="number"
+          id="day_input"
+          min="1"
+          max="31"
+          required
+        />
         <span class="input__label">Enter day number</span>
       </label>
       <div class="button-group">
-        <button type="submit" >Show fact</button>
-        <button type="reset" >Reset</button>
+        <button type="submit">Show fact</button>
+        <button type="reset">Reset</button>
       </div>
     </form>
-    
+
     <ul id="output_ul" class="rolldown-list" id="myList"></ul>
-    
-    
+
     <script src="html_elements.js"></script>
     <script type="module" src="submit_forms.js"></script>
     <script type="module" src="requests.js"></script>
     <script type="module" src="handle_submit.js"></script>
     <script src="toogle_form.js"></script>
-    <script src="remove.js"></script>
     <script src="forms.js"></script>
     <script type="module" src="favorites.js"></script>
     <script type="module" src="load_favorites.js"></script>
     <script type="module" src="localStorage.js"></script>
-
-</body>
+    <script type="module" src="ContextMenu.js"></script>
+    <script type="module" src="init_context_menu.js"></script>
+    <!--
+      To DO:
+      show dleted facts
+      random fact 
+    -->
+  </body>
 </html>

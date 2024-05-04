@@ -1,28 +1,27 @@
 import { GetNumberDescription, GetDateDescription } from "./requests.js";
-import { ChangeFavorite } from "./favorites.js"
-import { GetMaxValueNumber } from "./localStorage.js"
+import { ChangeFavorite } from "./favorites.js";
+import { GetMaxValueNumber } from "./localStorage.js";
+import { init_context_menu } from "./init_context_menu.js";
 
 export function handleSubmit() {
-    if (current_form === 'number') {
-        GetNumberDescription(number_input.value, AddListItem)
-    }
-    else {
-        GetDateDescription(month_input.value, day_input.value, AddListItem)
-    }
-
+  if (current_form === "number") {
+    GetNumberDescription(number_input.value, AddListItem);
+  } else {
+    GetDateDescription(month_input.value, day_input.value, AddListItem);
+  }
 }
 
 export function AddListItem(answer, focused = false, id = null) {
-    const li = document.createElement("li")
-    li.className = 'task'
-    li.id = id != null ? id : CreateLiId()
-    const text_div = document.createElement("div")
-    text_div.className = 'task__field'
-    text_div.style.padding = '1em'
-    text_div.textContent = answer
-    const buttonElement = document.createElement('button');
-    buttonElement.className = 'like-button';
-    buttonElement.innerHTML = `
+  const li = document.createElement("li");
+  li.className = "task";
+  li.id = id != null ? id : CreateLiId();
+  const text_div = document.createElement("div");
+  text_div.className = "task__field";
+  text_div.style.padding = "1em";
+  text_div.textContent = answer;
+  const buttonElement = document.createElement("button");
+  buttonElement.className = "like-button";
+  buttonElement.innerHTML = `
         <div class="like-wrapper">
         <div class="ripple"></div>
             <svg class="heart" width="24" height="24" viewBox="0 0 24 24">
@@ -39,71 +38,76 @@ export function AddListItem(answer, focused = false, id = null) {
     </div>
     `;
 
-    if (focused) {
-        buttonElement.classList.add('focused')
-    }
-    else {
-        setTimeout(() => buttonElement.classList.toggle('focused'), 100);
-        setTimeout(() => buttonElement.classList.toggle('focused'), 1000);
-    }
+  if (focused) {
+    buttonElement.classList.add("focused");
+  } else {
+    setTimeout(() => buttonElement.classList.toggle("focused"), 100);
+    setTimeout(() => buttonElement.classList.toggle("focused"), 1000);
+  }
 
-    buttonElement.addEventListener('click', function () {
-        buttonElement.id += ChangeFavorite(buttonElement, answer, li.id)
-        buttonElement.classList.toggle('focused')
-    })
+  buttonElement.addEventListener("click", function () {
+    buttonElement.id += ChangeFavorite(buttonElement, answer, li.id);
+    buttonElement.classList.toggle("focused");
+  });
 
-    sessionStorage.setItem(li.id, answer)
+  text_div.addEventListener('contextmenu', function(){
+    sessionStorage.setItem('current_item_text', text_div.textContent)
+    sessionStorage.setItem('current_item_id', li.id)
+  })
 
-    li.append(text_div, buttonElement);
-    output_ul.appendChild(li)
+  sessionStorage.setItem(li.id, answer);
 
-    DeleteItemHandler()
+  li.append(text_div, buttonElement);
+  output_ul.appendChild(li);
+
+  DeleteItemHandler();
+  init_context_menu(text_div);
 }
 
 function DeleteItemHandler() {
+  $(".task").each(function () {
+    var lastDeletedTask;
+    var $field = $(this).find(".task__field");
+    var li = $(this);
+    var mousedown = false;
 
-
-    $('.task').each(function () {
-        var lastDeletedTask;
-        var $field = $(this).find('.task__field');
-        var li = $(this)
-        var mousedown = false;
-
-
-        $field.on('mousedown', function () {
-            mousedown = true;
-            $field.addClass('shaking');
-            setTimeout(deleteTask, 1000)
-        });
-
-        $field.on('mouseup', function () {
-            mousedown = false;
-            $field.removeClass('shaking');
-        });
-
-        function deleteTask() {
-            if (mousedown) {
-                $field.addClass('delete');
-                sessionStorage.removeItem(li.attr("id"))
-                lastDeletedTask = $field.text();
-
-                setTimeout(function () {
-                    $field.remove();
-                }, 200);
-            } else { return; }
-        }
-
+    $field.on("mousedown", function (event) {
+      if (event.which === 1) {
+        mousedown = true;
+        $field.addClass("shaking");
+        setTimeout(deleteTask, 1000);
+      }
     });
+
+    $field.on("mouseup", function () {
+      mousedown = false;
+      $field.removeClass("shaking");
+    });
+
+    function deleteTask() {
+      if (mousedown) {
+        $field.addClass("delete");
+        sessionStorage.removeItem(li.attr("id"));
+        lastDeletedTask = $field.text();
+
+        setTimeout(function () {
+          $field.remove();
+        }, 200);
+      } else {
+        return;
+      }
+    }
+  });
 }
 
 function CreateLiId() {
-    let max = GetMaxValueNumber()
-    for (let index = 0; index < sessionStorage.length; index++) {
-        let key = +sessionStorage.key(index)
-        if (max < key) {
-            max = key
-        }
+  let max = GetMaxValueNumber();
+  for (let index = 0; index < sessionStorage.length; index++) {
+    let key = +sessionStorage.key(index);
+    if (max < key) {
+      max = key;
     }
+  }
 
-    return max + 1;
+  return max + 1;
 }
