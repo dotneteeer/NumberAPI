@@ -501,7 +501,7 @@ body {
  .button-group {
 	 margin-top: calc(var(--size-bezel) * 2.5);
 }
- button {
+ button, .random_button {
 	 color: currentColor;
 	 padding: var(--size-bezel) calc(var(--size-bezel) * 2);
 	 background: var(--color-accent);
@@ -509,8 +509,9 @@ body {
 	 border-radius: var(--size-radius);
 	 font-weight: 900;
    transition: background  0.5s ease;
+   cursor: pointer;
 }
- button[type=reset] {
+ button[type=reset]:not(.random_button){
 	 background: var(--color-background);
 	 font-weight: 200;
 }
@@ -530,6 +531,11 @@ body {
 
 
 button:hover:not(button[type='reset']) {
+  background: #fab7008c;
+  
+}
+
+.random_button:hover {
   background: #fab7008c;
   
 }

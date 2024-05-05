@@ -21,7 +21,11 @@
 
     <link rel="stylesheet" href="ContextMenu.css" />
     <title>Number API</title>
-    <link rel="shortcut icon" href="number_icon.png" type="image/x-icon" />
+    <link
+      rel="shortcut icon"
+      href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDRcMDRsUFRAWIB0iIiAdHx4kKDQtJCYxJx8fLT0tMS0sOjo6Iys/RD0vQzQwMC0BCgoKDQwNGg8PGjclHyU3NzU3NystNTU1NzU3NzAtKzUtLSsrLS01Ky0tLTc1LS0tLTUrKy01KzctKy03LS0rK//AABEIACAAIAMBIgACEQEDEQH/xAAZAAADAAMAAAAAAAAAAAAAAAADBAYBAgX/xAAsEAABAgUCAwcFAAAAAAAAAAABAgMABBESIQUTMUFRBhQiJKGx4VJhcYGR/8QAFwEAAwEAAAAAAAAAAAAAAAAAAQIFAP/EABkRAAIDAQAAAAAAAAAAAAAAAAECABESA//aAAwDAQACEQMRAD8AAVOXUBUePONVSz11xJH7hiTRWaSCQfFEXpE3NaXOTepBKnZFMzszQGcKJIPoafMWWfJkNOexKjuryq0J/sDLTqFAKu4wr24sMhpT7Cwpp18qQUnBFBSKCaa8y5U1F0EPZqZudAGLSTg74kE4CuscbsbsuM64xMJC2XXglYPMeKHAHEPEpSeJ5QQKWKhLQTdk2opU9TBZLIMCvkESU1xqa0zY0h1e5JomN+VUfpVgj2x1/MX02vzS6HF3WEErUoAONJXaapubraftGLVldxCq1ziFXnkxn6aAn//Z"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <h1 style="text-align: center">
@@ -46,6 +50,7 @@
       </label>
       <div class="button-group">
         <button type="submit">Show fact</button>
+        <button type="reset" class="random_button" id="random_number">Show random</button>
         <button type="reset">Reset</button>
       </div>
     </form>
@@ -79,23 +84,25 @@
       </label>
       <div class="button-group">
         <button type="submit">Show fact</button>
+        <button type="reset" class="random_button" id="random_date">Show random</button>
         <button type="reset">Reset</button>
       </div>
     </form>
 
     <ul id="output_ul" class="rolldown-list" id="myList"></ul>
 
-    <script src="html_elements.js"></script>
-    <script type="module" src="submit_forms.js"></script>
-    <script type="module" src="requests.js"></script>
-    <script type="module" src="handle_submit.js"></script>
-    <script src="toogle_form.js"></script>
-    <script src="forms.js"></script>
-    <script type="module" src="favorites.js"></script>
-    <script type="module" src="load_favorites.js"></script>
-    <script type="module" src="localStorage.js"></script>
-    <script type="module" src="ContextMenu.js"></script>
-    <script type="module" src="init_context_menu.js"></script>
+    <script src="./JS/html_elements.js"></script>
+    <script type="module" src="./JS/submit_forms.js"></script>
+    <script type="module" src="./JS/requests.js"></script>
+    <script type="module" src="./JS/handle_submit.js"></script>
+    <script src="./JS/toogle_form.js"></script>
+    <script src="./JS/forms.js"></script>
+    <script type="module" src="./JS/favorites.js"></script>
+    <script type="module" src="./JS/load_favorites.js"></script>
+    <script type="module" src="./JS/localStorage.js"></script>
+    <script type="module" src="./JS/ContextMenu.js"></script>
+    <script type="module" src="./JS/init_context_menu.js"></script>
+    <script src="./JS/random_button.js"></script>
     <!--
       To DO:
       show dleted facts

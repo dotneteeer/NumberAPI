@@ -4,8 +4,9 @@ number_input=document.querySelector("#number_input"),
 month_input=document.querySelector("#month_input"),
 day_input=document.querySelector("#day_input"),
 toogle_form_button=document.querySelector("#toogle_form_button"),
-output_ul=document.querySelector("#output_ul")
+output_ul=document.querySelector("#output_ul"),
+random_number=document.querySelector("#random_number"),
+random_date=document.querySelector("#random_date")
 
 
-let current_inputs=[number_input]
 let current_form='number'
