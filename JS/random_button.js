@@ -1,7 +1,7 @@
 random_number.addEventListener('click', function(){
     const number=Math.floor(Math.random() * 1000)
     number_input.value=number;
-    SubmitForm(form)
+    SubmitForm(number_form)
 })
 
 random_date.addEventListener('click', function(){
