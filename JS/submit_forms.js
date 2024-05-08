@@ -51,11 +51,11 @@ export function AddListItem(answer, focused = false, id = null) {
   });
 
   text_div.addEventListener('contextmenu', function(){
-    sessionStorage.setItem('current_item_text', text_div.textContent)
+    sessionStorage.setItem('current_item', JSON.stringify({"value":text_div.textContent, "status":JSON.parse(sessionStorage.getItem(li.id)).status}))
     sessionStorage.setItem('current_item_id', li.id)
   })
 
-  sessionStorage.setItem(li.id, answer);
+  sessionStorage.setItem(li.id, JSON.stringify({"value":answer, "status":"exists"}));
 
   li.append(text_div, buttonElement);
   output_ul.appendChild(li);
@@ -66,9 +66,8 @@ export function AddListItem(answer, focused = false, id = null) {
 
 function DeleteItemHandler() {
   $(".task").each(function () {
-    var lastDeletedTask;
     var $field = $(this).find(".task__field");
-    var li = $(this);
+    var $li = $(this);
     var mousedown = false;
 
     $field.on("mousedown", function (event) {
@@ -87,12 +86,15 @@ function DeleteItemHandler() {
     function deleteTask() {
       if (mousedown) {
         $field.addClass("delete");
-        sessionStorage.removeItem(li.attr("id"));
-        lastDeletedTask = $field.text();
+        const value=JSON.parse(sessionStorage.getItem($li.attr("id"))).value
+        sessionStorage.setItem($li.attr("id"), JSON.stringify({"value": value, "status":"deleted"}));
 
         setTimeout(function () {
-          $field.remove();
+          $li.hide();
+          $field.removeClass("shaking");
+          $field.removeClass("delete");
         }, 200);
+
       } else {
         return;
       }

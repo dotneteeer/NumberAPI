@@ -6,7 +6,9 @@ day_input=document.querySelector("#day_input"),
 toogle_form_button=document.querySelector("#toogle_form_button"),
 output_ul=document.querySelector("#output_ul"),
 random_number=document.querySelector("#random_number"),
-random_date=document.querySelector("#random_date")
+random_date=document.querySelector("#random_date"),
+show_deleted_button=document.querySelector("#show_deleted_button")
 
 
 let current_form='number'
+let is_deleted_shown=false;

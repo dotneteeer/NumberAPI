@@ -20,7 +20,7 @@
     />
 
     <link rel="stylesheet" href="ContextMenu.css" />
-    <title>Number API</title>
+    <title>Numbers API</title>
     <link
       rel="shortcut icon"
       href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDRcMDRsUFRAWIB0iIiAdHx4kKDQtJCYxJx8fLT0tMS0sOjo6Iys/RD0vQzQwMC0BCgoKDQwNGg8PGjclHyU3NzU3NystNTU1NzU3NzAtKzUtLSsrLS01Ky0tLTc1LS0tLTUrKy01KzctKy03LS0rK//AABEIACAAIAMBIgACEQEDEQH/xAAZAAADAAMAAAAAAAAAAAAAAAADBAYBAgX/xAAsEAABAgUCAwcFAAAAAAAAAAABAgMABBESIQUTMUFRBhQiJKGx4VJhcYGR/8QAFwEAAwEAAAAAAAAAAAAAAAAAAQIFAP/EABkRAAIDAQAAAAAAAAAAAAAAAAECABESA//aAAwDAQACEQMRAD8AAVOXUBUePONVSz11xJH7hiTRWaSCQfFEXpE3NaXOTepBKnZFMzszQGcKJIPoafMWWfJkNOexKjuryq0J/sDLTqFAKu4wr24sMhpT7Cwpp18qQUnBFBSKCaa8y5U1F0EPZqZudAGLSTg74kE4CuscbsbsuM64xMJC2XXglYPMeKHAHEPEpSeJ5QQKWKhLQTdk2opU9TBZLIMCvkESU1xqa0zY0h1e5JomN+VUfpVgj2x1/MX02vzS6HF3WEErUoAONJXaapubraftGLVldxCq1ziFXnkxn6aAn//Z"
@@ -31,9 +31,14 @@
     <h1 style="text-align: center">
       An API for interesting facts about numbers
     </h1>
-    <button id="toogle_form_button" class="button-6" role="button">
-      Show date form
-    </button>
+    <div id="buttons_div">
+      <button id="toogle_form_button" class="button-6" role="button">
+        Show date form
+      </button>
+      <button id="show_deleted_button" class="button-6" role="button">
+        Show recently deleted
+      </button>
+    </div>
     <form id="number_form" class="card">
       <h2>Number form</h2>
       <label class="input">
@@ -50,7 +55,9 @@
       </label>
       <div class="button-group">
         <button type="submit">Show fact</button>
-        <button type="reset" class="random_button" id="random_number">Show random</button>
+        <button type="reset" class="random_button" id="random_number">
+          Show random
+        </button>
         <button type="reset">Reset</button>
       </div>
     </form>
@@ -84,7 +91,9 @@
       </label>
       <div class="button-group">
         <button type="submit">Show fact</button>
-        <button type="reset" class="random_button" id="random_date">Show random</button>
+        <button type="reset" class="random_button" id="random_date">
+          Show random
+        </button>
         <button type="reset">Reset</button>
       </div>
     </form>
@@ -103,6 +112,7 @@
     <script type="module" src="./JS/ContextMenu.js"></script>
     <script type="module" src="./JS/init_context_menu.js"></script>
     <script src="./JS/random_button.js"></script>
+    <script src="./JS/handle_deleted.js"></script>
     <!--
       To DO:
       show dleted facts

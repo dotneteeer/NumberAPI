@@ -1,4 +1,4 @@
- export class ContextMenu {
+export class ContextMenu {
   constructor({ target = null, menuItems = [], mode = "dark" }) {
     this.target = target;
     this.menuItems = menuItems;
@@ -40,8 +40,8 @@
   }
 
   createItemMarkup(data) {
-    const button = document.createElement("BUTTON");
-    const item = document.createElement("LI");
+    const button = document.createElement("button");
+    const item = document.createElement("li");
 
     button.innerHTML = data.content;
     button.classList.add("contextMenu-button");
@@ -57,18 +57,51 @@
       });
     }
 
+    item.task = data.task;
+
     return item;
   }
 
   renderMenu() {
-    const menuContainer = document.createElement("UL");
+    const menuContainerDelete=this.renderDeleteMenu();//no copy option
+    const menuContainerRestore=this.renderRestoreMenu(menuContainerDelete);//doesnt close after click
 
-    menuContainer.classList.add("contextMenu");
-    menuContainer.setAttribute("data-theme", this.mode);
+    let menuContainers = [menuContainerDelete, menuContainerRestore];
+    return menuContainers;
+  }
 
-    this.menuItemsNode.forEach((item) => menuContainer.appendChild(item));
+  renderDeleteMenu(){
+    const menuContainerDelete = document.createElement("ul");
 
-    return menuContainer;
+    menuContainerDelete.classList.add("contextMenu");
+    menuContainerDelete.setAttribute("data-theme", this.mode);
+
+    let menuItemsNode=[...this.menuItemsNode];
+    const restoreItem=menuItemsNode.find(item=>item.task==='restore')
+   
+    menuItemsNode.splice(menuItemsNode.indexOf(restoreItem), 1)
+
+    menuItemsNode.forEach(item=>menuContainerDelete.appendChild(item))
+
+    return menuContainerDelete;
+  }
+
+  renderRestoreMenu(){
+    const menuContainerRestore = document.createElement("ul");
+
+    menuContainerRestore.classList.add("contextMenu");
+    menuContainerRestore.setAttribute("data-theme", this.mode);
+
+    let menuItemsNode=[...this.menuItemsNode];
+    
+    const deleteItem=menuItemsNode.find(item=>item.task==='delete')
+
+    menuItemsNode.splice(menuItemsNode.indexOf(deleteItem), 1)
+
+    menuItemsNode.forEach(item=>menuContainerRestore.appendChild(item))//suspect
+
+    return menuContainerRestore;
+
   }
 
   closeMenu(menu) {
@@ -79,13 +112,17 @@
   }
 
   init() {
-    const contextMenu = this.renderMenu();
-    document.addEventListener("click", () => this.closeMenu(contextMenu));
-    window.addEventListener("blur", () => this.closeMenu(contextMenu));
+    const contextMenus = this.renderMenu();
+    document.addEventListener("click", () =>
+      contextMenus.forEach((contextMenu) => this.closeMenu(contextMenu))
+    );
+    window.addEventListener("blur", () =>
+      contextMenus.forEach((contextMenu) => this.closeMenu(contextMenu))
+    );
     document.addEventListener("contextmenu", (e) => {
       this.targetNode.forEach((target) => {
         if (!e.target.contains(target)) {
-          contextMenu.remove();
+          contextMenus.forEach((contextMenu) => contextMenu.remove());
         }
       });
     });
@@ -96,6 +133,13 @@
         this.isOpened = true;
 
         const { clientX, clientY } = e;
+        let contextMenu;
+        const currentItem = JSON.parse(sessionStorage.getItem("current_item"));
+        if (currentItem.status === "deleted") {
+          contextMenu = contextMenus[1]; //menuContainerRestore
+        } else {
+          contextMenu = contextMenus[0]; //menuContainerDelete
+        }
         document.body.appendChild(contextMenu);
 
         const positionY =
