@@ -9,6 +9,7 @@ export function init_context_menu(target) {
   const menuItems = [
     {
       task:"copy",
+      usage:2,
       content: `${copyIcon}Copy`,
       events: {
         click: () =>
@@ -19,6 +20,7 @@ export function init_context_menu(target) {
     },
     {
       task:"restore",
+      usage:1,
       content:`${restoreIcon}Restore`,
       divider:"top",
       events:{
@@ -35,6 +37,7 @@ export function init_context_menu(target) {
     },
     {
       task:"delete",
+      usage:1,
       content: `${deleteIcon}Delete`,
       divider: "top",
       events: {

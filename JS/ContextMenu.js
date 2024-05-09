@@ -28,12 +28,14 @@ export class ContextMenu {
     }
 
     this.menuItems.forEach((data, index) => {
-      const item = this.createItemMarkup(data);
-      item.firstChild.setAttribute(
-        "style",
-        `animation-delay: ${index * 0.08}s`
-      );
-      nodes.push(item);
+      for (let i = 0; i < data.usage; i++) {
+        const item = this.createItemMarkup(data);
+        item.firstChild.setAttribute(
+          "style",
+          `animation-delay: ${index * 0.08}s`
+        );
+        nodes.push(item);
+      }
     });
 
     return nodes;
@@ -58,51 +60,53 @@ export class ContextMenu {
     }
 
     item.task = data.task;
-
+    item.used=false;
     return item;
   }
 
   renderMenu() {
-    const menuContainerDelete=this.renderDeleteMenu();//no copy option
-    const menuContainerRestore=this.renderRestoreMenu(menuContainerDelete);//doesnt close after click
-
+    const menuContainerRestore = this.renderRestoreMenu(); 
+    const menuContainerDelete = this.renderDeleteMenu(); 
     let menuContainers = [menuContainerDelete, menuContainerRestore];
     return menuContainers;
   }
 
-  renderDeleteMenu(){
+  renderDeleteMenu() {
     const menuContainerDelete = document.createElement("ul");
 
     menuContainerDelete.classList.add("contextMenu");
     menuContainerDelete.setAttribute("data-theme", this.mode);
 
-    let menuItemsNode=[...this.menuItemsNode];
-    const restoreItem=menuItemsNode.find(item=>item.task==='restore')
-   
-    menuItemsNode.splice(menuItemsNode.indexOf(restoreItem), 1)
+    const deleteItem =this.getUnusedItem(this.menuItemsNode, 'delete');
+    const copyItem=this.getUnusedItem(this.menuItemsNode, 'copy')
+  
 
-    menuItemsNode.forEach(item=>menuContainerDelete.appendChild(item))
-
+    menuContainerDelete.append(copyItem, deleteItem)
     return menuContainerDelete;
   }
 
-  renderRestoreMenu(){
+  renderRestoreMenu() {
     const menuContainerRestore = document.createElement("ul");
 
     menuContainerRestore.classList.add("contextMenu");
     menuContainerRestore.setAttribute("data-theme", this.mode);
 
-    let menuItemsNode=[...this.menuItemsNode];
-    
-    const deleteItem=menuItemsNode.find(item=>item.task==='delete')
+    const restoreItem=this.getUnusedItem(this.menuItemsNode, 'restore')
+    const copyItem=this.getUnusedItem(this.menuItemsNode, 'copy')
 
-    menuItemsNode.splice(menuItemsNode.indexOf(deleteItem), 1)
-
-    menuItemsNode.forEach(item=>menuContainerRestore.appendChild(item))//suspect
+    menuContainerRestore.append(copyItem, restoreItem)
 
     return menuContainerRestore;
-
   }
+
+  getUnusedItem(array, task) {
+    const foundItem = array.find((item) => item.task === task && !item.used);
+    if (foundItem) {
+        foundItem.used = true;
+        return foundItem;
+    }
+    return null;
+  }  
 
   closeMenu(menu) {
     if (this.isOpened) {
