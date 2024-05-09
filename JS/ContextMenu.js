@@ -60,13 +60,13 @@ export class ContextMenu {
     }
 
     item.task = data.task;
-    item.used=false;
+    item.used = false;
     return item;
   }
 
   renderMenu() {
-    const menuContainerRestore = this.renderRestoreMenu(); 
-    const menuContainerDelete = this.renderDeleteMenu(); 
+    const menuContainerRestore = this.renderRestoreMenu();
+    const menuContainerDelete = this.renderDeleteMenu();
     let menuContainers = [menuContainerDelete, menuContainerRestore];
     return menuContainers;
   }
@@ -77,11 +77,10 @@ export class ContextMenu {
     menuContainerDelete.classList.add("contextMenu");
     menuContainerDelete.setAttribute("data-theme", this.mode);
 
-    const deleteItem =this.getUnusedItem(this.menuItemsNode, 'delete');
-    const copyItem=this.getUnusedItem(this.menuItemsNode, 'copy')
-  
+    const deleteItem = this.getUnusedItem(this.menuItemsNode, "delete");
+    const copyItem = this.getUnusedItem(this.menuItemsNode, "copy");
 
-    menuContainerDelete.append(copyItem, deleteItem)
+    menuContainerDelete.append(copyItem, deleteItem);
     return menuContainerDelete;
   }
 
@@ -91,10 +90,10 @@ export class ContextMenu {
     menuContainerRestore.classList.add("contextMenu");
     menuContainerRestore.setAttribute("data-theme", this.mode);
 
-    const restoreItem=this.getUnusedItem(this.menuItemsNode, 'restore')
-    const copyItem=this.getUnusedItem(this.menuItemsNode, 'copy')
+    const restoreItem = this.getUnusedItem(this.menuItemsNode, "restore");
+    const copyItem = this.getUnusedItem(this.menuItemsNode, "copy");
 
-    menuContainerRestore.append(copyItem, restoreItem)
+    menuContainerRestore.append(copyItem, restoreItem);
 
     return menuContainerRestore;
   }
@@ -102,27 +101,28 @@ export class ContextMenu {
   getUnusedItem(array, task) {
     const foundItem = array.find((item) => item.task === task && !item.used);
     if (foundItem) {
-        foundItem.used = true;
-        return foundItem;
+      foundItem.used = true;
+      return foundItem;
     }
     return null;
-  }  
+  }
 
   closeMenu(menu) {
     if (this.isOpened) {
-      this.isOpened = false;
       menu.remove();
     }
   }
 
   init() {
     const contextMenus = this.renderMenu();
-    document.addEventListener("click", () =>
-      contextMenus.forEach((contextMenu) => this.closeMenu(contextMenu))
-    );
-    window.addEventListener("blur", () =>
-      contextMenus.forEach((contextMenu) => this.closeMenu(contextMenu))
-    );
+    document.addEventListener("click", () => {
+      contextMenus.forEach((contextMenu) => this.closeMenu(contextMenu));
+      this.isOpened = false;
+    });
+    window.addEventListener("blur", () => {
+      contextMenus.forEach((contextMenu) => this.closeMenu(contextMenu));
+      this.isOpened = false;
+    });
     document.addEventListener("contextmenu", (e) => {
       this.targetNode.forEach((target) => {
         if (!e.target.contains(target)) {

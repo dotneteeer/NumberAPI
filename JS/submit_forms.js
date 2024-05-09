@@ -50,12 +50,21 @@ export function AddListItem(answer, focused = false, id = null) {
     buttonElement.classList.toggle("focused");
   });
 
-  text_div.addEventListener('contextmenu', function(){
-    sessionStorage.setItem('current_item', JSON.stringify({"value":text_div.textContent, "status":JSON.parse(sessionStorage.getItem(li.id)).status}))
-    sessionStorage.setItem('current_item_id', li.id)
-  })
+  text_div.addEventListener("contextmenu", function () {
+    sessionStorage.setItem(
+      "current_item",
+      JSON.stringify({
+        value: text_div.textContent,
+        status: JSON.parse(sessionStorage.getItem(li.id)).status,
+      })
+    );
+    sessionStorage.setItem("current_item_id", li.id);
+  });
 
-  sessionStorage.setItem(li.id, JSON.stringify({"value":answer, "status":"exists"}));
+  sessionStorage.setItem(
+    li.id,
+    JSON.stringify({ value: answer, status: "exists" })
+  );
 
   li.append(text_div, buttonElement);
   output_ul.appendChild(li);
@@ -70,7 +79,7 @@ function DeleteItemHandler() {
     var $li = $(this);
     var mousedown = false;
 
-    $field.on("mousedown", function (event) {
+    $field.unbind("mousedown").on("mousedown", function (event) {
       if (event.which === 1) {
         mousedown = true;
         $field.addClass("shaking");
@@ -85,16 +94,14 @@ function DeleteItemHandler() {
 
     function deleteTask() {
       if (mousedown) {
-        $field.addClass("delete");
-        const value=JSON.parse(sessionStorage.getItem($li.attr("id"))).value
-        sessionStorage.setItem($li.attr("id"), JSON.stringify({"value": value, "status":"deleted"}));
-
+        const element = JSON.parse(sessionStorage.getItem($li.attr("id")));
+        if(element.status==="exists"){
+          $field.addClass("delete");
+        }
         setTimeout(function () {
-          $li.hide();
-          $field.removeClass("shaking");
-          $field.removeClass("delete");
+          mousedown = false;
+          HandleDelete($li, $field, element);
         }, 200);
-
       } else {
         return;
       }
@@ -112,4 +119,19 @@ function CreateLiId() {
   }
 
   return max + 1;
+}
+
+function HandleDelete($li, $field, element) {
+  
+  if (element.status === "exists") {
+    $li.hide();
+    $field.addClass("deleted");
+  } else {
+    $li.show();
+    $field.removeClass("deleted");
+  }
+  $field.removeClass("shaking");
+  $field.removeClass("delete");
+  element.status = element.status === "exists" ? "deleted" : "exists";
+  sessionStorage.setItem($li.attr("id"), JSON.stringify(element));
 }

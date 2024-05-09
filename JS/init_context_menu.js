@@ -30,7 +30,7 @@ export function init_context_menu(target) {
               const key=sessionStorage.getItem("current_item_id")
               const element=JSON.parse(sessionStorage.getItem(key))
               element.status='exists'
-              sessionStorage.setItem(key, element)
+              sessionStorage.setItem(key, JSON.stringify(element))
             }
         }
       }
