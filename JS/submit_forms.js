@@ -132,6 +132,7 @@ function HandleDelete($li, $field, element) {
   }
   $field.removeClass("shaking");
   $field.removeClass("delete");
+  $field.blur();
   element.status = element.status === "exists" ? "deleted" : "exists";
   sessionStorage.setItem($li.attr("id"), JSON.stringify(element));
 }
