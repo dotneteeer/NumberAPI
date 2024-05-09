@@ -125,10 +125,10 @@ function HandleDelete($li, $field, element) {
   
   if (element.status === "exists") {
     $li.hide();
-    $field.addClass("deleted");
+    $li.addClass("deleted");
   } else {
     $li.show();
-    $field.removeClass("deleted");
+    $li.removeClass("deleted");
   }
   $field.removeClass("shaking");
   $field.removeClass("delete");
