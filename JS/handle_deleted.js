@@ -1,6 +1,5 @@
-show_deleted_button.addEventListener('click', function(){
-    is_deleted_shown=is_deleted_shown==true?false:true
-    show_deleted_button.textContent=is_deleted_shown==true?'Hide recently deleted':'Show recently deleted'
+show_deleted_input.addEventListener('click', function(){
+    is_deleted_shown=show_deleted_input.checked;
     
 
     let facts=[]

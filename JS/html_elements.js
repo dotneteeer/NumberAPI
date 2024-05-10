@@ -7,8 +7,8 @@ toogle_form_button=document.querySelector("#toogle_form_button"),
 output_ul=document.querySelector("#output_ul"),
 random_number=document.querySelector("#random_number"),
 random_date=document.querySelector("#random_date"),
-show_deleted_button=document.querySelector("#show_deleted_button")
+show_deleted_input=document.querySelector("#switch")
 
 
 let current_form='number'
-let is_deleted_shown=false;
+let is_deleted_shown=show_deleted_input.checked;

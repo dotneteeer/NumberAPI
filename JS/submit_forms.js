@@ -95,12 +95,13 @@ function DeleteItemHandler() {
     function deleteTask() {
       if (mousedown) {
         const element = JSON.parse(sessionStorage.getItem($li.attr("id")));
-        if(element.status==="exists"){
+        if(element.status==="exists" && is_deleted_shown===false){
           $field.addClass("delete");
         }
         setTimeout(function () {
           mousedown = false;
           HandleDelete($li, $field, element);
+          CheckIsDeletedShown($li)
         }, 200);
       } else {
         return;
@@ -135,4 +136,11 @@ function HandleDelete($li, $field, element) {
   $field.blur();
   element.status = element.status === "exists" ? "deleted" : "exists";
   sessionStorage.setItem($li.attr("id"), JSON.stringify(element));
+}
+
+
+function CheckIsDeletedShown($li){
+  if(is_deleted_shown){
+    $li.show();
+  }
 }
