@@ -139,7 +139,7 @@ function HandleDelete($li, $field, element) {
 }
 
 
-function CheckIsDeletedShown($li){
+export function CheckIsDeletedShown($li){
   if(is_deleted_shown){
     $li.show();
   }
