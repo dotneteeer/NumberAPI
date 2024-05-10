@@ -51,4 +51,10 @@ input:checked + #toogle_label:after {
     border-radius: var(--size-radius);
     font-weight: 900;
     font-size: 13.333px;
+    cursor: pointer;
+}
+
+#toogle_deleted_div label{
+    cursor: pointer;
+    user-select: none;
 }
