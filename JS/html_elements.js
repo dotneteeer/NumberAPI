@@ -7,8 +7,10 @@ toogle_form_button=document.querySelector("#toogle_form_button"),
 output_ul=document.querySelector("#output_ul"),
 random_number=document.querySelector("#random_number"),
 random_date=document.querySelector("#random_date"),
-show_deleted_input=document.querySelector("#switch")
+show_deleted_input=document.querySelector("#switch_deleted"),
+show_favorites_input=document.querySelector("#switch_favorites")
 
 
 let current_form='number'
 let is_deleted_shown=show_deleted_input.checked;
+let is_favorite_shown=show_favorites_input.checked;

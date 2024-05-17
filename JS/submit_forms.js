@@ -48,6 +48,10 @@ export function AddListItem(answer, focused = false, id = null) {
   buttonElement.addEventListener("click", function () {
     buttonElement.id += ChangeFavorite(buttonElement, answer, li.id);
     buttonElement.classList.toggle("focused");
+    const element=sessionStorage.getItem(li.id)
+    const elementJson=JSON.parse(element)
+    elementJson.favorite=!elementJson.favorite;
+    sessionStorage.setItem(li.id, JSON.stringify(elementJson))
   });
 
   text_div.addEventListener("contextmenu", function () {
@@ -63,7 +67,7 @@ export function AddListItem(answer, focused = false, id = null) {
 
   sessionStorage.setItem(
     li.id,
-    JSON.stringify({ value: answer, status: "exists" })
+    JSON.stringify({ value: answer, status: "exists", favorite:focused })
   );
 
   li.append(text_div, buttonElement);
@@ -144,3 +148,4 @@ export function CheckIsDeletedShown($li){
     $li.show();
   }
 }
+

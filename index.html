@@ -35,16 +35,23 @@
       An API for interesting facts about numbers
     </h1>
     <div id="buttons_div">
-      <button id="toogle_form_button" role="button">
-        Show date form
-      </button>
-      <label id="toogle_deleted_div" class="button-6">
-        <label for="switch">Show recently deleted</label>
-        <input type="checkbox" id="switch" /><label
-          id="toogle_label"
-          for="switch"
-        ></label>
-      </label>
+      <button id="toogle_form_button" role="button">Show date form</button>
+      <div id="toogle_div">
+        <label class="toogle_div">
+          <label for="switch_deleted">Show recently deleted</label>
+          <input type="checkbox" id="switch_deleted" /><label
+            id="toogle_label"
+            for="switch_deleted"
+          ></label>
+        </label>
+        <label class="toogle_div">
+          <label for="switch_favorites">Show only favorites</label>
+          <input type="checkbox" id="switch_favorites" /><label
+            id="toogle_label"
+            for="switch_favorites"
+          ></label>
+        </label>
+      </div>
     </div>
     <form id="number_form" class="card">
       <h2>Number form</h2>
@@ -120,5 +127,10 @@
     <script type="module" src="./JS/init_context_menu.js"></script>
     <script src="./JS/random_button.js"></script>
     <script src="./JS/handle_deleted.js"></script>
+    <script type="module" src="./JS/toogle_favorites.js"></script>
+
+    <!--
+      share button
+    -->
   </body>
 </html>

@@ -1,3 +1,5 @@
+
+
 input[type=checkbox]{
 	height: 0;
 	width: 0;
@@ -40,7 +42,7 @@ input:checked + #toogle_label:after {
 	width: 22.5px;
 }
 
-#toogle_deleted_div{
+.toogle_div{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,9 +54,10 @@ input:checked + #toogle_label:after {
     font-weight: 900;
     font-size: 13.333px;
     cursor: pointer;
+	margin-bottom: 5px;
 }
 
-#toogle_deleted_div label{
+.toogle_div label{
     cursor: pointer;
     user-select: none;
 }
