@@ -49,10 +49,11 @@ export function init_context_menu(target) {
         click: () => {
           const li_id = sessionStorage.getItem("current_item_id");
           const $li = $(`#${li_id}`);
-          const value = JSON.parse(sessionStorage.getItem(li_id)).value;
+          const elementJson=JSON.parse(sessionStorage.getItem(li_id))
+          elementJson.status="deleted";
           sessionStorage.setItem(
             li_id,
-            JSON.stringify({ value: value, status: "deleted" })
+            JSON.stringify(elementJson)
           );
 
           setTimeout(function () {

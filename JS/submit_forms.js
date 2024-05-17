@@ -75,6 +75,7 @@ export function AddListItem(answer, focused = false, id = null) {
 
   DeleteItemHandler();
   init_context_menu(text_div);
+  CheckIsFavoriteShown($(`#${li.id}`), focused)
 }
 
 function DeleteItemHandler() {
@@ -147,5 +148,11 @@ export function CheckIsDeletedShown($li){
   if(is_deleted_shown){
     $li.show();
   }
+}
+
+export function CheckIsFavoriteShown($li, focused){
+    if(is_favorite_shown&&!focused){
+      $li.hide();
+    }
 }
 

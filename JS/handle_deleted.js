@@ -1,3 +1,4 @@
+import {CheckIsFavoriteShown} from './submit_forms.js'
 show_deleted_input.addEventListener('click', function(){
     is_deleted_shown=show_deleted_input.checked;
     
@@ -21,5 +22,6 @@ show_deleted_input.addEventListener('click', function(){
             element.hide()
            }
         }
+        CheckIsFavoriteShown(element, factJson.favorite)
     })
 })
