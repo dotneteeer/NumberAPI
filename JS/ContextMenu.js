@@ -28,6 +28,9 @@ export class ContextMenu {
     }
 
     this.menuItems.forEach((data, index) => {
+      if (!data.usage) {
+        data.usage = 1;
+      }
       for (let i = 0; i < data.usage; i++) {
         const item = this.createItemMarkup(data);
         item.firstChild.setAttribute(
@@ -59,7 +62,9 @@ export class ContextMenu {
       });
     }
 
-    item.task = data.task;
+    if (data.task) {
+      item.task = data.task;
+    }
     item.used = false;
     return item;
   }
@@ -79,8 +84,17 @@ export class ContextMenu {
 
     const deleteItem = this.getUnusedItem(this.menuItemsNode, "delete");
     const copyItem = this.getUnusedItem(this.menuItemsNode, "copy");
+    const shareTgItem = this.getUnusedItem(this.menuItemsNode, "shareTg");
+    const shareXItem = this.getUnusedItem(this.menuItemsNode, "shareX");
+    const shareVkItem = this.getUnusedItem(this.menuItemsNode, "shareVk");
 
-    menuContainerDelete.append(copyItem, deleteItem);
+    menuContainerDelete.append(
+      copyItem,
+      shareTgItem,
+      shareXItem,
+      shareVkItem,
+      deleteItem
+    );
     return menuContainerDelete;
   }
 
@@ -92,8 +106,17 @@ export class ContextMenu {
 
     const restoreItem = this.getUnusedItem(this.menuItemsNode, "restore");
     const copyItem = this.getUnusedItem(this.menuItemsNode, "copy");
+    const shareTgItem = this.getUnusedItem(this.menuItemsNode, "shareTg");
+    const shareXItem = this.getUnusedItem(this.menuItemsNode, "shareX");
+    const shareVkItem = this.getUnusedItem(this.menuItemsNode, "shareVk");
 
-    menuContainerRestore.append(copyItem, restoreItem);
+    menuContainerRestore.append(
+      copyItem,
+      shareTgItem,
+      shareXItem,
+      shareVkItem,
+      restoreItem
+    );
 
     return menuContainerRestore;
   }

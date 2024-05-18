@@ -15,7 +15,9 @@ export function GetMaxValueNumber() {
 export function SortLocalStorage() {
     const keys = Object.keys(localStorage);
 
-    const numericKeys = keys.map(key => parseInt(key, 10));
+    const validNumbers = keys.filter(Number);
+
+    const numericKeys = validNumbers.map(key => parseInt(key, 10));
 
 
     numericKeys.sort((a, b) => a - b);
