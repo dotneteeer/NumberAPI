@@ -8,9 +8,12 @@ output_ul=document.querySelector("#output_ul"),
 random_number=document.querySelector("#random_number"),
 random_date=document.querySelector("#random_date"),
 show_deleted_input=document.querySelector("#switch_deleted"),
-show_favorites_input=document.querySelector("#switch_favorites")
+show_favorites_input=document.querySelector("#switch_favorites"),
+username_input=document.querySelector("#username_input"),
+password_input=document.querySelector("#password_input"),
+authorize_submit_button=document.querySelector("#authorize_submit_button")
 
-
-let current_form='number'
-let is_deleted_shown=show_deleted_input.checked;
-let is_favorite_shown=show_favorites_input.checked;
+let current_form='number',
+is_deleted_shown=show_deleted_input.checked,
+is_favorite_shown=show_favorites_input.checked,
+current_user=sessionStorage.getItem("CURRENT_USER")

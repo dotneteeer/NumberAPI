@@ -46,7 +46,7 @@ export function AddListItem(answer, focused = false, id = null) {
   }
 
   buttonElement.addEventListener("click", function () {
-    buttonElement.id += ChangeFavorite(buttonElement, answer, li.id);
+    ChangeFavorite(buttonElement, JSON.stringify({answer,user:current_user}), li.id);
     buttonElement.classList.toggle("focused");
     const element=sessionStorage.getItem(li.id)
     const elementJson=JSON.parse(element)
@@ -67,7 +67,7 @@ export function AddListItem(answer, focused = false, id = null) {
 
   sessionStorage.setItem(
     li.id,
-    JSON.stringify({ value: answer, status: "exists", favorite:focused })
+    JSON.stringify({ value: answer, status: "exists", favorite:focused, user:current_user })
   );
 
   li.append(text_div, buttonElement);
@@ -155,4 +155,3 @@ export function CheckIsFavoriteShown($li, focused){
       $li.hide();
     }
 }
-
