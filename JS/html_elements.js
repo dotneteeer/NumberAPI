@@ -11,9 +11,12 @@ show_deleted_input=document.querySelector("#switch_deleted"),
 show_favorites_input=document.querySelector("#switch_favorites"),
 username_input=document.querySelector("#username_input"),
 password_input=document.querySelector("#password_input"),
-authorize_submit_button=document.querySelector("#authorize_submit_button")
+authorize_submit_button=document.querySelector("#authorize_submit_button"),
+user_div=document.querySelector("#user_div"),
+username_strong=document.querySelector("#username_strong"),
+logout_button=document.querySelector("#logout_button")
 
 let current_form='number',
 is_deleted_shown=show_deleted_input.checked,
 is_favorite_shown=show_favorites_input.checked,
-current_user=sessionStorage.getItem("CURRENT_USER")
+current_user=JSON.parse(sessionStorage.getItem("CURRENT_USER"))
