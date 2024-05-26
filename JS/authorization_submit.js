@@ -5,6 +5,10 @@ password_input.addEventListener('keypress', function(event){
     SubmitUserAuthorization()
   }
 })
+password_input.addEventListener('input', function(){
+  password_input.placeholder="Your password"
+  password_input.style.borderColor="#22272d"
+})
 username_input.addEventListener('keypress', function(event){
   if (event.keyCode === 13) {
     username_input.blur()
