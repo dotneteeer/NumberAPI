@@ -46,7 +46,7 @@ export function AddListItem(answer, focused = false, id = null) {
   }
 
   buttonElement.addEventListener("click", function () {
-    ChangeFavorite(buttonElement, JSON.stringify({answer,user:current_user}), li.id);
+    ChangeFavorite(buttonElement, {answer,user:current_user}, li.id);
     buttonElement.classList.toggle("focused");
     const element=sessionStorage.getItem(li.id)
     const elementJson=JSON.parse(element)
