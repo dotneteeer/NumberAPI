@@ -46,12 +46,13 @@ export function AddListItem(answer, focused = false, id = null) {
   }
 
   buttonElement.addEventListener("click", function () {
-    ChangeFavorite(buttonElement, {answer,user:current_user}, li.id);
+    ChangeFavorite(buttonElement, { answer, user: current_user }, li.id);
     buttonElement.classList.toggle("focused");
-    const element=sessionStorage.getItem(li.id)
-    const elementJson=JSON.parse(element)
-    elementJson.favorite=!elementJson.favorite;
-    sessionStorage.setItem(li.id, JSON.stringify(elementJson))
+    const element = sessionStorage.getItem(li.id);
+    const elementJson = JSON.parse(element);
+    elementJson.favorite = !elementJson.favorite;
+    sessionStorage.setItem(li.id, JSON.stringify(elementJson));
+    CheckIsFavoriteShown($(`#${li.id}`), focused);
   });
 
   text_div.addEventListener("contextmenu", function () {
@@ -67,7 +68,12 @@ export function AddListItem(answer, focused = false, id = null) {
 
   sessionStorage.setItem(
     li.id,
-    JSON.stringify({ value: answer, status: "exists", favorite:focused, user:current_user })
+    JSON.stringify({
+      value: answer,
+      status: "exists",
+      favorite: focused,
+      user: current_user,
+    })
   );
 
   li.append(text_div, buttonElement);
@@ -75,7 +81,7 @@ export function AddListItem(answer, focused = false, id = null) {
 
   DeleteItemHandler();
   init_context_menu(text_div);
-  CheckIsFavoriteShown($(`#${li.id}`), focused)
+  CheckIsFavoriteShown($(`#${li.id}`), focused);
 }
 
 function DeleteItemHandler() {
@@ -100,13 +106,13 @@ function DeleteItemHandler() {
     function deleteTask() {
       if (mousedown) {
         const element = JSON.parse(sessionStorage.getItem($li.attr("id")));
-        if(element.status==="exists" && is_deleted_shown===false){
+        if (element.status === "exists" && is_deleted_shown === false) {
           $field.addClass("delete");
         }
         setTimeout(function () {
           mousedown = false;
           HandleDelete($li, $field, element);
-          CheckIsDeletedShown($li)
+          CheckIsDeletedShown($li);
         }, 200);
       } else {
         return;
@@ -128,7 +134,6 @@ function CreateLiId() {
 }
 
 function HandleDelete($li, $field, element) {
-  
   if (element.status === "exists") {
     $li.hide();
     $li.addClass("deleted");
@@ -143,15 +148,14 @@ function HandleDelete($li, $field, element) {
   sessionStorage.setItem($li.attr("id"), JSON.stringify(element));
 }
 
-
-export function CheckIsDeletedShown($li){
-  if(is_deleted_shown){
+export function CheckIsDeletedShown($li) {
+  if (is_deleted_shown) {
     $li.show();
   }
 }
 
-export function CheckIsFavoriteShown($li, focused){
-    if(is_favorite_shown&&!focused){
-      $li.hide();
-    }
+export function CheckIsFavoriteShown($li, focused) {
+  if (is_favorite_shown && !focused) {
+    $li.hide();
+  }
 }
