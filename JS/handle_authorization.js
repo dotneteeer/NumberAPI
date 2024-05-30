@@ -10,7 +10,7 @@ export async function SubmitUserAuthorization() {
   
   for (const item of localStorageArray) {
     const itemJson=JSON.parse(item)
-    const hashed_password=await hash(password_input.value)
+    const hashed_password= await hash(password_input.value)
     if(itemJson.login===username_input.value&&itemJson.password!==hashed_password){
       password_input.placeholder="Incorrect password"
       password_input.style.borderColor='#cc0000'

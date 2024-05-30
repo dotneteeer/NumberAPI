@@ -1,7 +1,7 @@
 random_number.addEventListener('click', function(){
     const number=Math.floor(Math.random() * 1001)
     number_input.value=number;
-    SubmitForm(number_form)
+    Submit(number_form)
 })
 
 random_date.addEventListener('click', function(){
@@ -9,10 +9,10 @@ random_date.addEventListener('click', function(){
     const month=Math.floor(Math.random() * 13)
     day_input.value=day
     month_input.value=month
-    SubmitForm(date_form)
+    Submit(date_form)
 })
 
-function SubmitForm(form){
+export function Submit(element){
     const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
-    form.dispatchEvent(submitEvent);
+    element.dispatchEvent(submitEvent);
 }

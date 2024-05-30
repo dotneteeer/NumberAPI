@@ -14,7 +14,8 @@ password_input=document.querySelector("#password_input"),
 authorize_submit_button=document.querySelector("#authorize_submit_button"),
 user_div=document.querySelector("#user_div"),
 username_strong=document.querySelector("#username_strong"),
-logout_button=document.querySelector("#logout_button")
+logout_button=document.querySelector("#logout_button"),
+delete_account_button=document.querySelector("#delete_account_button")
 
 let current_form='number',
 is_deleted_shown=show_deleted_input.checked,
