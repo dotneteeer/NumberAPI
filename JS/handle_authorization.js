@@ -17,6 +17,12 @@ export async function SubmitUserAuthorization() {
       password_input.value=''
       return;
     }
+    if(itemJson.login===username_input.value&&itemJson.password===hashed_password){
+      const user = { login:username_input.value, password: hashed_password };
+      sessionStorage.setItem("CURRENT_USER", JSON.stringify(user));
+      window.location.replace("index.html");
+      return;
+    }
   }
 
   CreateUser(username_input.value, password_input.value);

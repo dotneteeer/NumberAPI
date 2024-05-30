@@ -8,9 +8,6 @@ delete_account_button.addEventListener("click", function () {
     if (item[index].user && item[index].user.login === current_user.login) {
       sessionStorage.removeItem(SortedLocalStorage.numericKeys[index]);
     }
-    if (item[index].login && item[index].login === current_user.login) {
-      sessionStorage.removeItem(SortedLocalStorage.numericKeys[index]);
-    }
   }
   Submit(logout_button);
 });
