@@ -1,13 +1,18 @@
-import { SortLocalStorage } from "./localStorage.js";
-import { Submit } from "./random_button.js";
+let keysToRemove=[]
 delete_account_button.addEventListener("click", function () {
-  const SortedLocalStorage = SortLocalStorage();
-  for (let index = 0;index < SortedLocalStorage.localStorageArray.length;index++
-  ) {
-    const item = JSON.parse(SortedLocalStorage.localStorageArray[index]);
-    if (item[index].user && item[index].user.login === current_user.login) {
-      sessionStorage.removeItem(SortedLocalStorage.numericKeys[index]);
+  for (let index = 0; index < localStorage.length; index++) {
+    const key = localStorage.key(index)
+    const item=JSON.parse(localStorage.getItem(key))
+    if (item.user && item.user.login === current_user.login) {
+      keysToRemove.push(key)
+    }
+    if (item.login && item.login === current_user.login) {
+      keysToRemove.push(key)
     }
   }
-  Submit(logout_button);
+  keysToRemove.forEach((key)=>{
+    localStorage.removeItem(key)
+  })
+  var clickEvent = new MouseEvent("click", { "view": window, "bubbles": true, "cancelable": false });
+  logout_button.dispatchEvent(clickEvent)
 });

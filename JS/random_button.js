@@ -12,7 +12,7 @@ random_date.addEventListener('click', function(){
     Submit(date_form)
 })
 
-export function Submit(element){
+function Submit(element){
     const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
     element.dispatchEvent(submitEvent);
 }
